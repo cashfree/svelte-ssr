@@ -16,18 +16,13 @@ export interface ThemeStyle {
     color: string;
   };
   cardlayoutBackground: string;
-  payBtn: {
-    border: string;
-    color: string;
-    background: string;
-  };
 }
 
 export const themes: Record<string, ThemeStyle>  = {
   light: {
     fonts: [
       {
-        cssSrc: "https://fonts.googleapis.com/css2?family=Lato",
+        cssSrc: "https://fonts.googleapis.com/css2?family=Lato&display=swap",
       },
     ],
     base: {
@@ -46,16 +41,11 @@ export const themes: Record<string, ThemeStyle>  = {
       color: "#df1b41",
     },
     cardlayoutBackground: "#f6f9fb",
-    payBtn: {
-      border: "1px solid #2361d5",
-      color: "#2361d5",
-      background: "none",
-    },
   },
   dark: {
     fonts: [
       {
-        cssSrc: "https://fonts.googleapis.com/css2?family=Oxanium",
+        cssSrc: "https://fonts.googleapis.com/css2?family=Oxanium&display=swap",
       },
     ],
     base: {
@@ -74,16 +64,11 @@ export const themes: Record<string, ThemeStyle>  = {
       color: "#fe87a1",
     },
     cardlayoutBackground: "#1a1c2f",
-    payBtn: {
-      border: "1px solid #55ca6d",
-      color: "#FFFFFF",
-      background: "#55ca6d",
-    },
   },
   pink: {
     fonts: [
       {
-        cssSrc: "https://fonts.googleapis.com/css2?family=Schoolbell",
+        cssSrc: "https://fonts.googleapis.com/css2?family=Schoolbell&display=swap",
       },
     ],
     base: {
@@ -102,16 +87,11 @@ export const themes: Record<string, ThemeStyle>  = {
       color: "#de4156",
     },
     cardlayoutBackground: "#fcdcf4",
-    payBtn: {
-      border: "1px solid #cd3547",
-      color: "#FFFFFF",
-      background: "#cd3547",
-    },
   },
   purple: {
     fonts: [
       {
-        cssSrc: "https://fonts.googleapis.com/css2?family=Jaldi",
+        cssSrc: "https://fonts.googleapis.com/css2?family=Jaldi&display=swap",
       },
     ],
     base: {
@@ -130,16 +110,11 @@ export const themes: Record<string, ThemeStyle>  = {
       color: "#fd8098",
     },
     cardlayoutBackground: "#f8f8f8",
-    payBtn: {
-      border: "1px solid #6933d3",
-      color: "#ffffff",
-      background: "#6933d3",
-    },
   },
   gray: {
     fonts: [
       {
-        cssSrc: "https://fonts.googleapis.com/css2?family=B612+Mono",
+        cssSrc: "https://fonts.googleapis.com/css2?family=B612+Mono&display=swap",
       },
     ],
     base: {
@@ -150,7 +125,7 @@ export const themes: Record<string, ThemeStyle>  = {
         border: "1px solid #808080",
       },
       border: "1px solid #a4acb9",
-      borderRadius: "0px",
+      borderRadius: "5px",
       padding: "16px",
       color: "#000000",
     },
@@ -158,16 +133,11 @@ export const themes: Record<string, ThemeStyle>  = {
       color: "#bdc4cd",
     },
     cardlayoutBackground: "#bdc4cd",
-    payBtn: {
-      border: "1px solid #808080",
-      color: "#000000",
-      background: "#CCCCCC",
-    },
   },
   pastel: {
     fonts: [
       {
-        cssSrc: "https://fonts.googleapis.com/css2?family=Oxygen",
+        cssSrc: "https://fonts.googleapis.com/css2?family=Oxygen&display=swap",
       },
     ],
     base: {
@@ -186,10 +156,5 @@ export const themes: Record<string, ThemeStyle>  = {
       color: "#cb2c2c",
     },
     cardlayoutBackground: "#f7f9ff",
-    payBtn: {
-      border: "1px solid #7a8cbc",
-      color: "#ffffff",
-      background: "#7a8cbc",
-    },
   },
 };

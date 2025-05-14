@@ -12,9 +12,8 @@ interface CashfreeProps {
   onComplete?: (status: boolean) => void; //user passed
 }
 
-// 👇 Internal logic with hooks, uses Redux state
 const InternalCardLayout: React.FC<CashfreeProps> = ({
-  theme = 'dark',
+  theme = 'light',
   customStyle = {},
   children,
   onComplete
@@ -31,6 +30,7 @@ const InternalCardLayout: React.FC<CashfreeProps> = ({
     dispatch(setTheme(theme));
   }, [theme]);
 
+
   useEffect(() => {
     const internallyComplete =
       isCardNumberComplete &&
@@ -38,10 +38,9 @@ const InternalCardLayout: React.FC<CashfreeProps> = ({
       isCardExpiryComplete &&
       isCardCvvComplete;
 
-    // Use user value if given, else fallback to internal
     dispatch(setIsComplete( internallyComplete));
     if (onComplete) {
-      onComplete(internallyComplete); // ✅ Let the user know
+      onComplete(internallyComplete);
     }
   }, [
     isCardNumberComplete,
@@ -71,7 +70,7 @@ const InternalCardLayout: React.FC<CashfreeProps> = ({
   );
 };
 
-// 👇 Exported wrapper: Injects Provider internally
+// Exported wrapper: Injects Provider internally
 const Cashfree: React.FC<CashfreeProps> = (props) => (
   <Provider store={store}>
     <InternalCardLayout {...props} />

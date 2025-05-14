@@ -13,7 +13,7 @@ const CardCvv: React.FC<CardNumberProps> = ({ customStyle }) => {
   let styleObject = {
     fonts: customStyle?.fonts ||
       themes[theme]?.fonts || [
-        { cssSrc: "https://fonts.googleapis.com/css2?family=Lato" },
+        { cssSrc: "https://fonts.googleapis.com/css2?family=Lato&display=swap" },
       ],
     base: {
       fontSize:

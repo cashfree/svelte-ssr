@@ -22,7 +22,7 @@ const App: React.FC = () => {
     <div style={{ padding: "40px", background: "#f0f2f5", height: "100vh" }}>
       <h2>Cashfree Card Payment Demo</h2>
       <Cashfree
-        theme="dark"
+        theme="pastel"
         onComplete={(status) => {
           console.log("Status from component:", status);
           setIsComplete(status); // this is your local app state
@@ -35,12 +35,8 @@ const App: React.FC = () => {
           <CardHolder />
         </div>
         <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
-          <div>
             <CardExpiry />
-          </div>
-          <div>
             <CardCvv />
-          </div>
         </div>
         <SaveInstrument />
 
