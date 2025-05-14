@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cardCvvComplete } from "../redux/cardSlice";
 import { load } from "@cashfreepayments/cashfree-js";
-import { useSelector, useDispatch } from "react-redux";
 import { themes } from "../constants/theme";
 
-function SaveCard({ customStyle }) {
+import { RootState } from "../redux/store"; // Assuming your root reducer is configured here
+import { CardNumberProps } from "../types";
+const CardCvv: React.FC<CardNumberProps> = ({ customStyle }) => {
   const dispatch = useDispatch();
-  const { theme } = useSelector((state) => state.card);
+  const { theme } = useSelector((state: RootState) => state.card);
+
   let styleObject = {
     fonts: customStyle?.fonts ||
       themes[theme]?.fonts || [
@@ -25,7 +29,7 @@ function SaveCard({ customStyle }) {
       ":focus": {
         border:
           customStyle?.base?.focusedBorder ||
-          themes[theme]?.base?.focusedBorder ||
+          themes[theme]?.base?.[":focus"]?.border ||
           "1px solid #2361d5",
       },
       border:
@@ -47,25 +51,26 @@ function SaveCard({ customStyle }) {
     },
     backgroundColor:
       customStyle?.backgroundColor ||
-      themes[theme]?.backgroundColor ||
+      themes[theme]?.base?.backgroundColor ||
       "#f6f9fb",
   };
-  let saveOptions = {
-    values: {
-      label: "Save Card for later",
-    },
+
+  let cvvOptions = {
     style: styleObject,
   };
 
   useEffect(() => {
     (async () => {
       const cashfree = await load({ mode: "production" });
-      const save = cashfree.create("savePaymentInstrument", saveOptions);
-      save.mount("#save");
+      const cardCvv = cashfree.create("cardCvv", cvvOptions);
+      cardCvv.mount("#cardCvv");
+      cardCvv.on("change", (data: { complete: boolean }) => {
+        dispatch(cardCvvComplete(data.complete));
+      });
     })();
   }, [dispatch, theme, customStyle]);
 
-  return <div id="save" style={{ marginBottom: "10px" }}></div>;
-}
+  return <div id="cardCvv" />;
+};
 
-export default SaveCard;
+export default CardCvv;

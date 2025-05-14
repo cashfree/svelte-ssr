@@ -1,4 +1,29 @@
-export const themes = {
+export interface ThemeStyle {
+  fonts: { cssSrc: string }[];
+  base: {
+    fontSize: string;
+    fontFamily: string;
+    backgroundColor: string;
+    ":focus"?: {  // Allow ":focus" in base as optional
+      border: string;
+    };
+    border: string;
+    borderRadius: string;
+    padding: string;
+    color: string;
+  };
+  invalid: {
+    color: string;
+  };
+  cardlayoutBackground: string;
+  payBtn: {
+    border: string;
+    color: string;
+    background: string;
+  };
+}
+
+export const themes: Record<string, ThemeStyle>  = {
   light: {
     fonts: [
       {

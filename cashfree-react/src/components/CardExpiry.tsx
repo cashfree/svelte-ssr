@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cardHolderNameComplete } from "../redux/cardSlice";
+import { cardExpiryComplete } from "../redux/cardSlice";
 import { load } from "@cashfreepayments/cashfree-js";
 import { themes } from "../constants/theme";
-function CardHolder({ customStyle = {} }) {
+import { RootState } from "../redux/store"; // Assuming your root reducer is configured here
+import {CardNumberProps} from '../types';
+const CardExpiry: React.FC<CardNumberProps> = ({ customStyle }) => {
   const dispatch = useDispatch();
-  const { theme } = useSelector((state) => state.card);
+const { theme } = useSelector((state: RootState) => state.card);
 
   useEffect(() => {
-    console.log("the selected theme", theme);
     let styleObject = {
       fonts: customStyle?.fonts ||
         themes[theme]?.fonts || [
@@ -30,7 +31,7 @@ function CardHolder({ customStyle = {} }) {
         ":focus": {
           border:
             customStyle?.base?.focusedBorder ||
-            themes[theme]?.base?.focusedBorder ||
+            themes[theme]?.base?.[":focus"]?.border ||
             "1px solid #2361d5",
         },
         border:
@@ -54,28 +55,25 @@ function CardHolder({ customStyle = {} }) {
       },
       backgroundColor:
         customStyle?.backgroundColor ||
-        themes[theme]?.backgroundColor ||
+        themes[theme]?.base?.backgroundColor ||
         "#f6f9fb",
     };
 
-    let cardHolderOptions = {
-      values: {
-        placeholder: "Enter Card Holder Name",
-      },
+    let cardExpiryOptions = {
       style: styleObject,
     };
 
     (async () => {
       const cashfree = await load({ mode: "production" });
-      const cardHolder = cashfree.create("cardHolder", cardHolderOptions);
-      cardHolder.mount("#cardHolder");
-      cardHolder.on("change", (data) => {
-        dispatch(cardHolderNameComplete(data.complete));
+      const cardExpiry = cashfree.create("cardExpiry", cardExpiryOptions);
+      cardExpiry.mount("#cardExpiry");
+      cardExpiry.on("change", (data: { complete: boolean }) => {
+        dispatch(cardExpiryComplete(data.complete));
       });
     })();
   }, [dispatch, theme, customStyle]);
 
-  return <div id="cardHolder" />;
+  return <div id="cardExpiry" />;
 }
 
-export default CardHolder;
+export default CardExpiry;
